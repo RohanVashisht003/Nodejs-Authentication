@@ -1,0 +1,18 @@
+.home-main-container{
+    position: relative;
+    top: 12%;
+    width: 100%;
+}
+
+#background-img{
+    background-image: url('https://img.icons8.com/ios-glyphs/344/lock--v1.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size:cover; */
+    opacity: 0.9;
+    height: 100vh;
+}
+
+h1,p{
+    text-align: center;
+}
