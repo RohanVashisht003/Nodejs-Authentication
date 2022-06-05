@@ -1,4 +1,3 @@
-
   <div class="header-blue">
 
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
@@ -9,11 +8,19 @@
               <span class="navbar-toggler-icon bg-light "></span>
           </button>
         <div class="collapse navbar-collapse" id="navcol-1">
+          <% if(locals.user) { %>
             <span class="navbar-text"> 
+              <a class="login" href="/users/sign-out">Sign Out</a>
+          </span>
+          <a class="btn btn-light action-button" role="button" href="/users/update-password-form"
+          >Update Password</a>
+            <% } else { %>
+              <span class="navbar-text"> 
                 <a class="login" href="/users/sign-in">Sign In</a>
-            </span>
-            <a class="btn btn-light action-button" role="button" href="/users/sign-up"
-            >SignUp</a>
+              </span>
+              <a class="btn btn-light action-button" role="button" href="/users/sign-up"
+              >SignUp</a>
+              <% } %>
         </div>
       </div>
     </nav>

@@ -1,10 +1,28 @@
-<link rel="stylesheet" href="/css/home.css">
-
+<link rel="stylesheet" href="/css/home.css" />
 
 <div class="home-main-container">
-    <h1>Welcome To Authentication App</h1>
-    <p><small>Please SignUp/LogIn to proceed</small></p>
- <div id="background-img">
-     
- </div>
+  <div class="content-container">
+    <% if(locals.user){ %>
+      <div class="text-container">
+        <h1>Hi! <br><%= locals.user.name %></h1>
+        <p>You are successfully logged in!</p>
+      </div>
+    
+    <% } else { %>
+      <div class="text-container">
+        <h1>Welcome to Authentication App</h1>
+        <p>Please SignUp/SignIn to proceed</p>
+      </div>
+    
+    <%}%>
+    <div id="background-img"></div>
+  </div>
+
+  <div class="display_background">
+    <span class="display_background_shape display_background_shape4"></span>
+    <span class="display_background_shape display_background_shape3"></span>
+    <span class="display_background_shape display_background_shape2"></span>
+    <span class="display_background_shape display_background_shape1"></span>
+  </div>
+  
 </div>
