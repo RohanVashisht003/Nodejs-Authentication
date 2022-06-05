@@ -63,7 +63,7 @@ body {
     border-radius: 32px;
 }
 
-.screen__background__shape3 {
+.screen_background_shape3 {
 	height: 540px;
 	width: 190px;
 	background: linear-gradient(270deg, #5D54A4, #6A679E);
@@ -72,7 +72,7 @@ body {
 	border-radius: 32px;
 }
 
-.screen__background__shape4 {
+.screen_background_shape4 {
 	height: 400px;
 	width: 200px;
 	background: #7E7BB9;	
@@ -84,7 +84,7 @@ body {
 .signIn{
     width: 320px;
 	padding: 30px;
-	padding-top: 156px;
+	padding-top: 69px;
 }
 
 .signIn_field {
@@ -98,9 +98,6 @@ body {
 	color: #7875B5;
 }
 
-.signIn_icon_1{
-	color: #7875B5;
-}
 
 .signIn_input {
 	border: none;
@@ -109,7 +106,7 @@ body {
 	padding: 10px;
 	padding-left: 24px;
 	font-weight: 700;
-	width: 75%;
+	width: 120%;
 	transition: .2s;
 }
 

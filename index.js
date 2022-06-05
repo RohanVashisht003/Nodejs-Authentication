@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-const port = 8001;
+const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const localStrategy = require('./config/passport-local-strategy');
+const googleStrategy = require('./config/passport-google-strategy');
 const MongoStore = require('connect-mongo');
 
 
@@ -41,12 +42,9 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(passport.setAuthenticatedUser);
 app.use('/', require('./routes'));
 
-
-
-app.use(passport.setAuthenticatedUser);
 
 app.listen(port, (err) => {
     if (err) {

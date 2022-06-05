@@ -51,10 +51,7 @@
     color: rgba(123, 117, 117, 0.578);
   }
 
-  .header-blue .navbar .navbar-toggler {
-    border-color: rgba(255, 254, 254, 0.968);
-    height: 50px;
-  }
+  
 
   .header-blue .navbar .navbar-toggler:hover, .header-blue .navbar-toggler:focus {
     background: none;
