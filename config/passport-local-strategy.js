@@ -27,16 +27,15 @@ passport.use(new localStrategy({
                 return done(null, false);
             }
         });
-        // let result = User.comparePassword(req.body.password);
-        // if(result==true){
-        //     console.log('Sign in successful');
+        
+        // if(req.body.password == user.password){
+        //     console.log("user logged in");
         //     return done(null,user);
         // }
         // else{
-        //     console.log('error','Invalid email/password');
+        //     console.log("incorrect password");
         //     return done(null, false);
         // }
-        
     });
 }
 ));
