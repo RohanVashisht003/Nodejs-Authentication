@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+
+    
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -24,8 +28,43 @@
     <main id="layout-main">
       <%- body %> 
     </main> 
-
+   
     <%- include('_footer.ejs'); %>
+    <%- script %>
+
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    
+    <script>
+      <% if(flash.success && flash.success.length>0) { %>
+        new Noty({
+          theme:'metroui',
+          text:'<%= flash.success %>',
+          type:'success',
+          layout:'topRight',
+          timeout:1000
+        }).show()
+      <% } %>
+
+      <% if(flash.error && flash.error.length>0){ %>
+        new Noty({
+          theme:'metroui',
+          text:'<%= flash.error %>',
+          type:'error',
+          layout:'topRight',
+          timeout:1000
+        }).show()
+        <% } %>
+
+      <% if(flash.information && flash.information.length>0){ %>
+        new Noty({
+          theme:'metroui',
+          text:'<%= flash.information %>',
+          type:'information',
+          layout:'topRight',
+          timeout:1000
+        }).show()
+        <% } %>
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -35,5 +74,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
       crossorigin="anonymous"></script>
+
   </body>
 </html>

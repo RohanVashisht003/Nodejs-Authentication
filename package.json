@@ -11,15 +11,21 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
+    "kue": "^0.11.6",
     "mongoose": "^6.3.5",
+    "nodemailer": "^6.7.5",
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "redis": "^4.1.0"
   }
 }

@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const resetPasswordController= require('../controllers/resetPasswordController');
 
+router.get('/',resetPasswordController.renderEmailForm);
+router.post('/email',resetPasswordController.validateUser);
+router.get('/reset-form/:token',resetPasswordController.renderResetPasswordForm);
 
-router.get('/password-reset-form/:token',resetPasswordController.renderResetPasswordForm);
-router.post('/update-password',resetPasswordController.resetPassword);
+router.post('/reset',resetPasswordController.resetPassword);
 
 module.exports = router;

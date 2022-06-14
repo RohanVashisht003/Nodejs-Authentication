@@ -1,7 +1,10 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+
+
+
 passport.use(new localStrategy({
     usernameField:'email',
     passReqToCallback: true
@@ -14,28 +17,21 @@ passport.use(new localStrategy({
             return done(err);
         }
         if(!user){
-            console.log('error', 'Invalid/email/password');
+            req.flash('information','User not registered')
+            console.log('error', 'User not registered');
             return done(null, false);
         }
         bcrypt.compare(req.body.password, user.password,(err,result)=>{
             if(result===true){
-                console.log("User logged in")
+                console.log("User logged in");
                 return done(null, user);
             }
             else{
+                req.flash('error','Invalid email/password')
                 console.log('error','Invalid email/password')
                 return done(null, false);
             }
         });
-        
-        // if(req.body.password == user.password){
-        //     console.log("user logged in");
-        //     return done(null,user);
-        // }
-        // else{
-        //     console.log("incorrect password");
-        //     return done(null, false);
-        // }
     });
 }
 ));

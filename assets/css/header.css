@@ -20,7 +20,7 @@
     /* border: 1px solid black; */
     padding: 8px;
     border-radius: 20px;
-    background-color: rgb(241, 207, 38);
+    background-color: rgb(244, 140, 13);
   }
 
   .header-blue .navbar .navbar-brand:hover {
@@ -99,7 +99,7 @@
     box-shadow: none;
     text-shadow: none;
     padding: .3rem .8rem;
-    background: greenyellow;
+    background: rgb(255, 158, 13);
     transition: background-color 0.25s;
     outline: none;
   }

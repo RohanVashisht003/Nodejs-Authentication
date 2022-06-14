@@ -9,12 +9,13 @@ const passport = require('passport');
 const localStrategy = require('./config/passport-local-strategy');
 const googleStrategy = require('./config/passport-google-strategy');
 const MongoStore = require('connect-mongo');
-
+const flash = require('connect-flash');
+const flashMiddleWare = require('./config/flash-middleware');
 
 app.use(express.static('./assets'));
 
 app.set('layout extractStyles', true);
-app.set('layout expressScripts', true);
+app.set('layout extractScripts', true);
 
 
 app.use(expressLayouts);
@@ -32,7 +33,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie:{
-        maxAge:(1000*60*100)
+        maxAge:(1000*60*10)
     },
     store: MongoStore.create({
         mongoUrl: 'mongodb+srv://rohan003:000@authentication-app003.cvhvzqi.mongodb.net/?retryWrites=true&w=majority'
@@ -43,6 +44,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(flashMiddleWare.setFlash);
 app.use('/', require('./routes'));
 
 
