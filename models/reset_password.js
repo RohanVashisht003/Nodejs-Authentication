@@ -13,7 +13,8 @@ const resetPasswordTokenScheme = new mongoose.Schema({
     isValid:{
         type:Boolean,
         required:true
-    }
+    },
+    expireIn:Date
 },{
     timestamps:true
 });

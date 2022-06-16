@@ -4,26 +4,26 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 
-
 passport.use(new localStrategy({
     usernameField:'email',
     passReqToCallback: true
 },
 (req,email, password, done)=>{
-    // find a use and establish identity
+    // find a user and establish identity
     User.findOne({email:email},(err, user)=>{
         if(err){
             console.log("err",err);
             return done(err);
         }
+
         if(!user){
             req.flash('information','User not registered')
             console.log('error', 'User not registered');
             return done(null, false);
         }
+
         bcrypt.compare(req.body.password, user.password,(err,result)=>{
             if(result===true){
-                console.log("User logged in");
                 return done(null, user);
             }
             else{
@@ -50,6 +50,13 @@ passport.deserializeUser((id,done)=>{
     });
 });
 
+passport.setAuthenticatedUser = (req,res,next)=>{
+    if(req.isAuthenticated()){
+        res.locals.user = req.user;
+    }
+    next();
+}
+
 passport.checkAuthentication = (req,res,next)=>{
     if(req.isAuthenticated()){
         return next();
@@ -57,10 +64,13 @@ passport.checkAuthentication = (req,res,next)=>{
     return res.redirect('/users/sign-in');
 }
 
-passport.setAuthenticatedUser = (req,res,next)=>{
-    if(req.isAuthenticated()){
-        res.locals.user = req.user;
+// verifying captcha
+passport.captchaVerify = (req, res, next)=>{
+    if (req.recaptcha.error) {
+        req.flash('error','reCAPTCHA Incorrect/Try again');
+        res.redirect('back');
+    } else {
+        return next();
     }
-    next();
 }
 module.exports = passport;

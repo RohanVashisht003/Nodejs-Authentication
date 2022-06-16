@@ -2,20 +2,48 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const usersController = require('../controllers/usersController');
+const env = require('../config/environment');
 
-router.get('/sign-in', usersController.signIn);
-router.get('/sign-up', usersController.signUp);
+
+// Recaptcha
+const Recaptcha = require('express-recaptcha').RecaptchaV2;
+const SITE_KEY = env.recaptcha_site_key;
+const SECRET_KEY = env.recaptcha_secret_key;
+const recaptcha = new Recaptcha(SITE_KEY, SECRET_KEY, { callback: "cb" });
+
+
+// sign-in route ----------------------------------
+router.get('/sign-in',recaptcha.middleware.render, usersController.signIn);
+// passport local login route
+router.post('/create-session',recaptcha.middleware.verify,passport.captchaVerify, passport.authenticate('local', {failureRedirect: '/users/sign-in'}),usersController.createSession);
+    
+
+// sign-up route----------------------------------------
+router.get('/sign-up',recaptcha.middleware.render, usersController.signUp);
+// create user route
+router.post('/create',recaptcha.middleware.verify,passport.captchaVerify, usersController.create);
+
+
+// sign-out route--------------------------------------
 router.get('/sign-out',usersController.destroySession);
-router.get('/auth/google',passport.authenticate('google',{scope:['email','profile']}));
-router.get('/update-password-form',usersController.renderUpdatePasswordForm);
+
+
+// google-authentication-----------------------------------
 router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect:'/users/sign-in'}),usersController.createSession);
+router.get('/auth/google',passport.authenticate('google',{scope:['email','profile']}));
 
-router.post('/create', usersController.create);
-router.post('/create-session', passport.authenticate('local', {
-    failureRedirect: '/users/sign-in'
-}),usersController.createSession);
 
+
+// update-password route------------------------------------
+router.get('/update-password-form',usersController.renderUpdatePasswordForm);
+// update password
 router.post('/update-password',usersController.updatePassword);
+
+
+
+
+
+
 
 
 

@@ -6,23 +6,26 @@ const signUpWorker = require('../workers/sign_up_mail_worker');
 const updatePasswordWorker = require('../workers/update_password_mail_worker');
 const queue = require('../config/kue')
 
+// rendering sign-in page
 module.exports.signIn = (req, res) => {
-    // if (req.isAuthenticated()) {
-    //     return res.redirect('/')
-    // }
+    if (req.isAuthenticated()) {
+        return res.redirect('/')
+    }
     return res.render('user_signIn', {
-        title: 'Sign-In'
+        title: 'Sign-In',
+        recaptcha: res.recaptcha
     })
 }
 
-
+// rendering sign-up page
 module.exports.signUp = (req, res) => {
     return res.render('user_signUp', {
-        title: 'SignUp'
+        title: 'SignUp',
+        recaptcha:res.recaptcha
     })
 }
 
-// create user
+// creating user
 module.exports.create = (req, res) => {
     try {
         if (req.body.password != req.body.confirm_password) {
@@ -72,11 +75,14 @@ module.exports.create = (req, res) => {
     }
 }
 
+// logging in user
 module.exports.createSession = (req, res) => {
-    req.flash('success','User logged in');
+    req.flash('success','User logged in!!');
+    console.log("User logged in");
     return res.redirect('/');
 }
 
+// logout user
 module.exports.destroySession = (req, res) => {
     req.logout(req.user, (err) => {
         if (err) {
@@ -88,13 +94,18 @@ module.exports.destroySession = (req, res) => {
     });
 }
 
+// rendering update password form
 module.exports.renderUpdatePasswordForm = (req, res) => {
-    return res.render('update_password_form', {
-        title: 'Update Password'
-    });
-
+    if(req.isAuthenticated()){
+        return res.render('update_password_form', {
+            title: 'Update Password'
+        });
+    }
+    req.flash('success','Session timed out');
+    return res.redirect('/');
 }
 
+// updating the password
 module.exports.updatePassword = (req, res) => {
     let loggedInUser = req.user;
     if (req.body.newPassword !== req.body.confirmPassword) {

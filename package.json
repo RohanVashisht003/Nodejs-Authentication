@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "prod_start":"SET NODE_ENV=production && nodemon index.js"
   },
   "author": "Rohan Sharma",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
+    "express-recaptcha": "^5.1.0",
     "express-session": "^1.17.3",
     "kue": "^0.11.6",
     "mongoose": "^6.3.5",

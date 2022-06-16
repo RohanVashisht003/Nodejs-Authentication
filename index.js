@@ -11,6 +11,8 @@ const googleStrategy = require('./config/passport-google-strategy');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const flashMiddleWare = require('./config/flash-middleware');
+const env = require('./config/environment');
+
 
 app.use(express.static('./assets'));
 
@@ -24,30 +26,42 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
+// using template engine
 app.set('view engine', 'ejs');
+
+// using static files
 app.set('views', './views');
 
+// using session
 app.use(session({
     name: 'authentication_app',
-    secret: 'blabla',
+    secret:env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie:{
-        maxAge:(1000*60*10)
+        maxAge:(1000*1800)
     },
+    // storing  session to mongodb
     store: MongoStore.create({
         mongoUrl: 'mongodb+srv://rohan003:000@authentication-app003.cvhvzqi.mongodb.net/?retryWrites=true&w=majority'
     }, (err) => {
         console.log(err || 'connect-mongo setup ok');
     })
 }))
+
+// using flash middleware
+app.use(flash());
+app.use(flashMiddleWare.setFlash);
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
-app.use(flash());
-app.use(flashMiddleWare.setFlash);
+
+
+// using routes
 app.use('/', require('./routes'));
+
 
 
 app.listen(port, (err) => {
