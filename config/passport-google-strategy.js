@@ -4,6 +4,7 @@ const User = require('../models/user');
 const crypto = require('crypto');
 const env = require('./environment')
 
+
 passport.use(new googleStrategy({
     clientID:  env.google_client_id,
     clientSecret: env.google_client_secret,
@@ -11,6 +12,7 @@ passport.use(new googleStrategy({
     passReqToCallback: true
 },(req,accessToken,refreshToken,profile,done)=>{
     console.log(profile);
+//     finding user using emailID
     User.findOne({email: profile.emails[0].value}).exec(function(err, user){
 
         if(err){
@@ -22,6 +24,7 @@ passport.use(new googleStrategy({
             return done(null, user);
         }
         else{
+//             if user not found then create one
             User.create({
                 name:profile.displayName,
                 email:profile.emails[0].value,
