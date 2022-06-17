@@ -1,6 +1,8 @@
+// '####'--> use your credentials
+
 const development={
     name:'development',
-    session_cookie_key:'blabla',
+    session_cookie_key:'####',
     db:'authentication_development',
     smtp:{
             service:'gmail',
@@ -8,15 +10,15 @@ const development={
             port:587,
             secure:false,
             auth:{
-                 user:'sharmashubham2961@gmail.com',
-                 pass:'nmdnjsclyblfdgbc'
+                 user:'####',
+                 pass:'####'
             }
     },
-    google_client_id:"936398041988-lhkrenb0avaqu5uo4s3btpongtbpdt4o.apps.googleusercontent.com",
-    google_client_secret:"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",
-    google_callback_url: "http://localhost:8000/users/auth/google/callback",
-    recaptcha_site_key: '6LdF83IgAAAAAPUsfVxfrrC-pwuSDhjh7RXsYNs1',
-    recaptcha_secret_key:'6LdF83IgAAAAAGUbKyKO4X4vyue2KVUi8SrTUyLB'
+    google_client_id:"####",
+    google_client_secret:"####",
+    google_callback_url: "####",
+    recaptcha_site_key: '####',
+    recaptcha_secret_key:'####'
 }
 
 
