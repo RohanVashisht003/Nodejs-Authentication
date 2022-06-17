@@ -1,6 +1,8 @@
+// '####' --> use your credentials
+
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://rohan003:000@authentication-app003.cvhvzqi.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('####');
 
 // mongoose.connect('mongodb://localhost/authentication_app')
 
