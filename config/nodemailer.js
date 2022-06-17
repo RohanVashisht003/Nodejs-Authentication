@@ -6,6 +6,7 @@ const env = require('./environment');
 
 let transporter = nodemailer.createTransport(env.smtp);
 
+// rendering templates
 let renderTemplate = (data,relativePath)=>{
     let mailHTML;
     ejs.renderFile(path.join(__dirname,'../views/mailers',relativePath),
