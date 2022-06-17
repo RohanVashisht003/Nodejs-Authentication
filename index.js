@@ -13,7 +13,7 @@ const flash = require('connect-flash');
 const flashMiddleWare = require('./config/flash-middleware');
 const env = require('./config/environment');
 
-
+// using static files
 app.use(express.static('./assets'));
 
 app.set('layout extractStyles', true);
@@ -29,7 +29,7 @@ app.use(cookieParser());
 // using template engine
 app.set('view engine', 'ejs');
 
-// using static files
+
 app.set('views', './views');
 
 // using session
