@@ -1,4 +1,6 @@
 const nodeMailer = require('../config/nodemailer');
+
+// send welcome message
 exports.sendWelcomeMail = (user) => {
     let htmlString = nodeMailer.renderTemplate({
         user
