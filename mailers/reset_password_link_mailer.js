@@ -1,9 +1,8 @@
 // '####' --> use your credentials
 
-
 const nodeMailer = require('../config/nodemailer');
 
-
+// send resetPassword link
 exports.sendResetPasswordLink = (resetPasswordToken, user)=>{
     let htmlString = nodeMailer.renderTemplate({resetPasswordToken:resetPasswordToken,user:user},'/reset_password_link.ejs');
 
