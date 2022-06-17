@@ -6,7 +6,7 @@ const signUpWorker = require('../workers/sign_up_mail_worker');
 const updatePasswordWorker = require('../workers/update_password_mail_worker');
 const queue = require('../config/kue')
 
-// rendering sign-in page
+// rendering sign-in page 
 module.exports.signIn = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/')
@@ -62,7 +62,9 @@ module.exports.create = (req, res) => {
                     console.log("User created successfully", user);
                     return res.redirect('/users/sign-in')
                 });
-            }if(user) {
+            }
+//             if user already exists
+            if(user) {
                 req.flash('information','User already exist');
                 console.log("User already exist")
                 return res.redirect('back');
