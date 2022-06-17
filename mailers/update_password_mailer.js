@@ -1,4 +1,6 @@
 const nodeMailer = require('../config/nodemailer');
+
+// send update password mail
 exports.sendPasswordUpdateMail =(user) =>{
     let htmlString = nodeMailer.renderTemplate({user:user},'/update_password_mail.ejs');
     nodeMailer.transporter.sendMail({
