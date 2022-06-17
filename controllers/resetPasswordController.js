@@ -30,6 +30,7 @@ module.exports.validateUser = async (req, res) => {
                 return;
             }
             if (user) {
+//                 creating accessToken for user
                 ResetPasswordToken.create({
                     user: user,
                     accessToken: crypto.randomBytes(20).toString('hex'),
@@ -80,14 +81,16 @@ module.exports.renderResetPasswordForm = async (req, res) => {
             console.log('error in db connections');
             return;
         }
-
+// if no token found
         if (!token) {
             return res.send('<center><h1>Invalid Access Token</h1></center>');
         }
 
+//         if token is not valid
         if (token.isValid == false) {
             return res.send('<center><h1>This token has expired</h1></center>');
         }
+//  if token is expired        
         if (token.expireIn < Date.now()) {
             return res.send('<center><h1>This token has expired timeout</h1></center>');
         }
@@ -113,6 +116,7 @@ module.exports.resetPassword = async (req, res) => {
             return res.redirect('back');
         }
 
+
         let resetToken = await ResetPasswordToken.findOne({
             accessToken: token
         }).populate('user');
@@ -123,8 +127,11 @@ module.exports.resetPassword = async (req, res) => {
             console.log("Reset token is invalid");
             return res.redirect('back');
         }
+// updating user password
         resetToken.user.password = password;
+//  marking token as false
         resetToken.isValid = false;
+// saving after changes
         resetToken.user.save();
         resetToken.save();
         req.flash('success', 'Password successfully changed');
