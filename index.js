@@ -43,7 +43,7 @@ app.use(session({
     },
     // storing  session to mongodb
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://rohan003:000@authentication-app003.cvhvzqi.mongodb.net/?retryWrites=true&w=majority'
+        mongoUrl: env.mongo_atlas
     }, (err) => {
         console.log(err || 'connect-mongo setup ok');
     })

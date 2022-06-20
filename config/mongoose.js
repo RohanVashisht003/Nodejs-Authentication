@@ -1,11 +1,11 @@
 // '####' --> use your credentials
 
 const mongoose = require('mongoose');
+const env= require('./environment');
 
-// mongoose.connect('####');
 
 // connecting with mongnodb
-mongoose.connect('mongodb://localhost/authentication_app')
+mongoose.connect(env.mongo_atlas);
 
 const db = mongoose.connection;
 

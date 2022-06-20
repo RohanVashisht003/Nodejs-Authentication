@@ -18,7 +18,8 @@ const development={
     google_client_secret:"####",
     google_callback_url: "####",
     recaptcha_site_key: '####',
-    recaptcha_secret_key:'####'
+    recaptcha_secret_key:'####',
+    mongo_atlas:'####',
 }
 
 
@@ -40,7 +41,8 @@ const production={
     google_client_secret:process.env.AUTHENTICATION_GOOGLE_CLIENT_SECRET,
     google_callback_url:process.env.AUTHENTICATION_GOOGLE_CALLBACK_URL ,
     recaptcha_site_key: process.env.AUTHENTICATION_RECAPTCHA_SITE_KEY,
-    recaptcha_secret_key:process.env.AUTHENTICATION_SECRET_KEY
+    recaptcha_secret_key:process.env.AUTHENTICATION_SECRET_KEY,
+    mongo_atlas:process.env.AUTHENTICATION_MONGO_ATLAS_URL,
 }
 
 module.exports =eval(process.env.AUTHENTICATION_ENVIRONMENT)==undefined ? development:eval(process.env.AUTHENTICATION_ENVIRONMENT);
